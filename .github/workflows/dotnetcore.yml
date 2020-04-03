@@ -22,10 +22,10 @@ jobs:
     - name: Build
       run: dotnet build --configuration Release --no-restore
     - name: Publish
-      run: dotnet publish -c Release -o '.' 
+      run: dotnet publish -c Release -o './myapp' 
     - name: Azure WebApp
       uses: Azure/webapps-deploy@v2
       with:
         app-name: BlazorFirstApp
         publish-profile: ${{ secrets.azureWebAppPublishProfile }}
-        package: '.'
+        package: './myapp'

@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: [ master ]
 
+env:
+  AZURE_WEBAPP_PACKAGE_PATH: './myapp'
+  
 jobs:
   build-and-deploy:
 
@@ -19,11 +22,10 @@ jobs:
         dotnet-version: 3.1.101    
     - name: Publish
       run: 
-        dotnet publish server/server.csproj -c Release -o './myapp' 
-        ls -la
+        dotnet publish server/server.csproj -c Release -o ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
     - name: Azure WebApp
       uses: Azure/webapps-deploy@v2
       with:
         app-name: BlazorFirstApp
         publish-profile: ${{ secrets.azureWebAppPublishProfile }}
-        package: './myapp'
+        package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}

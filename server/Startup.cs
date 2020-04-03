@@ -28,7 +28,7 @@ namespace BlazorFirstApp.Server
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                app.UseDeveloperExceptionPage();  
             }
             else
             {
